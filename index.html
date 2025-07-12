@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Rapzzxd | DANA • GOPAY • QRIS</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        :root {
+            --primary: #2b7cff;
+            --secondary: #00c3ff;
+            --dark: #0a0a1a;
+            --darker: #050510;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* STARFIELD ANIMATION */
+        .starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite ease-in-out;
+            opacity: 0;
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        /* GLOWING CIRCLE EFFECT */
+        .glow-circle {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(43, 124, 255, 0.15) 0%, rgba(43, 124, 255, 0) 70%);
+            border-radius: 50%;
+            filter: blur(20px);
+            z-index: -1;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, 30px); }
+        }
+        
+        /* MAIN CONTAINER */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* HEADER STYLES */
+        .header {
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(43, 124, 255, 0.3);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .header h1::after {
+            content: 'HD 3D';
+            position: absolute;
+            top: -15px;
+            right: -50px;
+            font-size: 1rem;
+            background: linear-gradient(45deg, #ff00cc, #3333ff);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+        
+        /* LOGO STYLES */
+        .logo-container {
+            position: relative;
+            margin: 2rem auto;
+            width: 180px;
+            height: 180px;
+        }
+        
+        .logo {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(43, 124, 255, 0.5);
+            box-shadow: 0 0 30px rgba(43, 124, 255, 0.4);
+            position: relative;
+            z-index: 1;
+            transition: transform 0.5s ease;
+        }
+        
+        .logo:hover {
+            transform: rotate(5deg) scale(1.05);
+        }
+        
+        .logo-glow {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(43, 124, 255, 0.3) 0%, rgba(43, 124, 255, 0) 70%);
+            animation: pulse-glow 3s infinite alternate;
+            z-index: 0;
+        }
+        
+        @keyframes pulse-glow {
+            0% { opacity: 0.5; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1.05); }
+        }
+        
+        /* TEXT STYLES */
+        .subtitle {
+            font-size: 1.2rem;
+            color: #a0c4ff;
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        .info-text {
+            font-size: 1.1rem;
+            color: #c0d6ff;
+            line-height: 1.6;
+            margin: 1.5rem 0;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* PAYMENT CARDS */
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .payment-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(43, 124, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .payment-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(43, 124, 255, 0.1), rgba(0, 195, 255, 0.05));
+            z-index: -1;
+        }
+        
+        .payment-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(43, 124, 255, 0.4);
+        }
+        
+        .payment-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .payment-title .hd-badge {
+            background: linear-gradient(45deg, #ff00cc, #3333ff);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+        
+        .payment-detail {
+            font-size: 1.3rem;
+            margin: 1rem 0;
+            word-break: break-all;
+            color: #e0f0ff;
+            font-weight: 600;
+        }
+        
+        /* BUTTON STYLES */
+        .btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 0.5rem;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(43, 124, 255, 0.4);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(43, 124, 255, 0.6);
+        }
+        
+        .btn:hover::after {
+            left: 100%;
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        /* QR CODE STYLES */
+        .qris-container {
+            margin: 1.5rem auto;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .qris-container::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 15px;
+            padding: 2px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        
+        .qris-image {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+        
+        /* MUSIC PLAYER */
+        .music-player {
+            margin: 2.5rem auto;
+            max-width: 300px;
+            text-align: center;
+        }
+        
+        .music-player audio {
+            width: 100%;
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .music-label {
+            display: inline-block;
+            margin-top: 0.8rem;
+            background: linear-gradient(45deg, #ff00cc, #3333ff);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+        
+        /* FOOTER */
+        .footer {
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 0.5px;
+        }
+        
+        /* RESPONSIVE ADJUSTMENTS */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h1::after {
+                top: -10px;
+                right: -40px;
+                font-size: 0.8rem;
+            }
+            
+            .payment-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Starfield Background -->
+    <div class="starfield" id="starfield"></div>
+    
+    <!-- Glowing Circles -->
+    <div class="glow-circle" style="top: 10%; left: 10%; animation-delay: 0s;"></div>
+    <div class="glow-circle" style="top: 70%; left: 80%; animation-delay: 1s;"></div>
+    <div class="glow-circle" style="top: 30%; left: 60%; width: 200px; height: 200px; animation-delay: 2s;"></div>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <header class="header">
+            <h1>Selamat Datang Di Website Payment Rapzzxd</h1>
+            <div class="subtitle">Pembayaran Digital Aman & Terpercaya</div>
+        </header>
+        
+        <!-- Logo -->
+        <div class="logo-container">
+            <div class="logo-glow"></div>
+            <img src="https://files.catbox.moe/kbtu8q.jpg" alt="Rapzzxd Logo" class="logo">
+        </div>
+        
+        <!-- Info Text -->
+        <p class="info-text">RapzzxdStr, Pembayaran Digital</p>
+        <p class="info-text">Setelah Transfer Mohon Kirimkan Bukti Transfer</p>
+        
+        <!-- Payment Methods -->
+        <div class="payment-grid">
+            <!-- DANA -->
+            <div class="payment-card">
+                <h2 class="payment-title">
+                    DANA
+                    <span class="hd-badge">HD 3D</span>
+                </h2>
+                <p class="payment-detail">087864252521</p>
+                <button class="btn" id="copyDana">Salin Nomor</button>
+            </div>
+            
+            <!-- GOPAY -->
+            <div class="payment-card">
+                <h2 class="payment-title">
+                    GOPAY
+                    <span class="hd-badge">HD 3D</span>
+                </h2>
+                <p class="payment-detail">SCAN QR!!</p>
+                <div class="qris-container">
+                    <img src="https://files.catbox.moe/ir13mw.png" alt="QRIS Code" class="qris-image">
+                </div>
+                <button class="btn">Buka QRIS</button>
+            </div>
+        </div>
+        
+        <!-- Music Player -->
+        <div class="music-player">
+            <audio controls>
+                <source src="https://files.catbox.moe/imfw4d.mp3" type="audio/mpeg">
+                Browser Anda tidak mendukung elemen audio.
+            </audio>
+            <div class="music-label">Play Musik</div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            © 2023 RapzzxdStr Payment | All Rights Reserved
+        </div>
+    </div>
+    
+    <script>
+        // Create starfield
+        const starfield = document.getElementById('starfield');
+        const starCount = 150;
+        
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            
+            // Random size between 1px and 3px
+            const size = Math.random() * 2 + 1;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            
+            // Random position
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            
+            // Random animation duration between 2s and 5s
+            const duration = Math.random() * 3 + 2;
+            star.style.setProperty('--duration', `${duration}s`);
+            
+            // Random delay
+            star.style.animationDelay = `${Math.random() * 5}s`;
+            
+            starfield.appendChild(star);
+        }
+        
+        // Copy DANA number functionality
+        document.getElementById('copyDana').addEventListener('click', function() {
+            const textToCopy = '087864252521';
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const originalText = this.textContent;
+                this.textContent = 'Tersalin!';
+                this.style.background = 'linear-gradient(135deg, #00ff88, #00c3ff)';
+                
+                setTimeout(() => {
+                    this.textContent = originalText;
+                    this.style.background = 'linear-gradient(135deg, var(--primary), var(--secondary))';
+                }, 2000);
+            });
+        });
+        
+        // Animate payment cards on scroll
+        const paymentCards = document.querySelectorAll('.payment-card');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        paymentCards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transitionDelay = `${index * 0.1}s`;
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
